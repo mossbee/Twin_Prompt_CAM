@@ -59,7 +59,7 @@ tracking_method: wandb
 wandb_enabled: true
 wandb_project: prompt_cam_twin
 wandb_entity: hunchoquavodb-hanoi-university-of-science-and-technology
-wandb_run_name: kaggle_p100_single
+wandb_run_name: null  # Let WandB generate unique names automatically
 wandb_tags: ['twin_verification', 'prompt_cam', 'dino', 'kaggle_p100']
 
 # Checkpoint settings (Important for Kaggle 12h timeout)
