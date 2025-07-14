@@ -2,7 +2,7 @@
 batch_size: 20                   # Larger batch size for P100 (16GB VRAM)
 crop_size: 224
 data: twin
-data_path: /kaggle/working/Twin_Prompt_CAM/data  # Kaggle input path
+data_path: /kaggle/working/Twin_Prompt_CAM/data  # Path to JSON files in cloned repo
 debug: false
 drop_path_rate: 0.1
 early_patience: 101
