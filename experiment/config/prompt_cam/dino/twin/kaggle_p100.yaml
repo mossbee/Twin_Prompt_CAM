@@ -2,7 +2,7 @@
 batch_size: 20                   # Larger batch size for P100 (16GB VRAM)
 crop_size: 224
 data: twin
-data_path: /kaggle/input/nd-twin-data  # Kaggle input path
+data_path: /kaggle/input/nd-twin/ND_TWIN_Dataset/ND_TWIN_Dataset_224  # Kaggle input path
 debug: false
 drop_path_rate: 0.1
 early_patience: 101
@@ -58,7 +58,7 @@ training_phases:
 tracking_method: wandb
 wandb_enabled: true
 wandb_project: prompt_cam_twin
-wandb_entity: null
+wandb_entity: hunchoquavodb-hanoi-university-of-science-and-technology
 wandb_run_name: kaggle_p100_single
 wandb_tags: ['twin_verification', 'prompt_cam', 'dino', 'kaggle_p100']
 
