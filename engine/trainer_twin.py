@@ -310,7 +310,7 @@ class TwinTrainer:
         if hasattr(self.tracker, 'log_dataset_statistics'):
             # Load dataset info for statistics
             try:
-                with open(os.path.join(self.params.data_path, 'dataset_infor.json'), 'r') as f:
+                with open(os.path.join(self.params.data_path, 'train_dataset_infor.json'), 'r') as f:
                     dataset_info = json.load(f)
                 with open(os.path.join(self.params.data_path, 'train_twin_pairs.json'), 'r') as f:
                     twin_pairs = json.load(f)
