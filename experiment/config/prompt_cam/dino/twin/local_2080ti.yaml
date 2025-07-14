@@ -1,0 +1,82 @@
+# Configuration for Local 2080Ti GPU Setup (Distributed Training)
+batch_size: 16                   # Per GPU batch size
+crop_size: 224
+data: twin
+data_path: ./data
+debug: false
+drop_path_rate: 0.1
+early_patience: 101
+epoch: 100
+eval_freq: 10
+final_acc_hp: true
+final_run: true
+full: false
+gpu_num: 2                       # 2x 2080Ti GPUs
+lr: 0.005
+lr_min: 1.0e-06
+model: dino
+momentum: 0.9
+normalized: true
+optimizer: sgd
+pretrained_weights: vit_base_patch16_dino
+random_seed: 42
+store_ckp: true
+test_batch_size: 24              # Slightly smaller for memory
+train_type: prompt_cam
+vpt_dropout: 0.1
+vpt_layer: null
+vpt_mode: null
+vpt_num: 2
+warmup_epoch: 20
+warmup_lr_init: 0
+wd: 0.001
+
+# Twin-specific configurations
+task_type: twin_verification
+class_num: 2
+
+# Distributed training settings
+distributed: true
+world_size: 2
+rank: 0
+dist_backend: nccl
+dist_url: tcp://127.0.0.1:23456
+multiprocessing_distributed: true
+mixed_precision: true            # Use mixed precision for memory efficiency
+
+# Training phases
+training_phases:
+  base:
+    epochs: 40
+    lr: 0.005
+    phase: base
+  twin_focused:
+    epochs: 30
+    lr: 0.001
+    phase: twin_focused
+  attention_refine:
+    epochs: 30
+    lr: 0.0001
+    phase: attention_refine
+
+# MLFlow tracking (local setup)
+tracking_method: mlflow
+mlflow_enabled: true
+mlflow_experiment_name: prompt_cam_twin_local
+mlflow_tracking_uri: http://localhost:5000  # Local MLFlow server
+
+# WandB tracking (backup)
+wandb_enabled: false
+wandb_project: prompt_cam_twin
+wandb_tags: ['twin_verification', 'prompt_cam', 'dino', 'local_2080ti']
+
+# Checkpoint settings
+checkpoint_every_epoch: true
+resume_from_checkpoint: null
+checkpoint_dir: ./checkpoints/local_2080ti
+
+# Memory optimization for 2080Ti (11GB VRAM)
+gradient_accumulation_steps: 1
+max_grad_norm: 1.0
+pin_memory: true
+num_workers: 4 

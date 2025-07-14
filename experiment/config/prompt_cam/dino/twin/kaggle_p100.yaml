@@ -1,0 +1,80 @@
+# Configuration for Kaggle P100 GPU Setup
+batch_size: 20                   # Larger batch size for P100 (16GB VRAM)
+crop_size: 224
+data: twin
+data_path: /kaggle/input/nd-twin-data  # Kaggle input path
+debug: false
+drop_path_rate: 0.1
+early_patience: 101
+epoch: 100
+eval_freq: 10
+final_acc_hp: true
+final_run: true
+full: false
+gpu_num: 1                       # Single P100 GPU
+lr: 0.005
+lr_min: 1.0e-06
+model: dino
+momentum: 0.9
+normalized: true
+optimizer: sgd
+pretrained_weights: vit_base_patch16_dino
+random_seed: 42
+store_ckp: true
+test_batch_size: 24
+train_type: prompt_cam
+vpt_dropout: 0.1
+vpt_layer: null
+vpt_mode: null
+vpt_num: 2
+warmup_epoch: 20
+warmup_lr_init: 0
+wd: 0.001
+
+# Twin-specific configurations
+task_type: twin_verification
+class_num: 2
+
+# Single GPU settings
+distributed: false
+mixed_precision: true            # Use mixed precision for memory efficiency
+
+# Training phases
+training_phases:
+  base:
+    epochs: 40
+    lr: 0.005
+    phase: base
+  twin_focused:
+    epochs: 30
+    lr: 0.001
+    phase: twin_focused
+  attention_refine:
+    epochs: 30
+    lr: 0.0001
+    phase: attention_refine
+
+# WandB tracking (primary for Kaggle)
+tracking_method: wandb
+wandb_enabled: true
+wandb_project: prompt_cam_twin
+wandb_entity: null
+wandb_run_name: kaggle_p100_single
+wandb_tags: ['twin_verification', 'prompt_cam', 'dino', 'kaggle_p100']
+
+# Checkpoint settings (Important for Kaggle 12h timeout)
+checkpoint_every_epoch: true
+resume_from_checkpoint: null
+checkpoint_dir: /kaggle/working/checkpoints
+save_to_kaggle_datasets: true   # Save checkpoints to Kaggle datasets
+
+# Memory optimization for P100 (16GB VRAM)
+gradient_accumulation_steps: 1
+max_grad_norm: 1.0
+pin_memory: true
+num_workers: 2                   # Lower for Kaggle
+
+# Kaggle-specific settings
+kaggle_environment: true
+save_interval: 10                # Save every 10 epochs due to time limit
+max_runtime_hours: 11           # Leave 1 hour buffer for Kaggle timeout 

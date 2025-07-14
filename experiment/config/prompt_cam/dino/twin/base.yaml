@@ -1,0 +1,64 @@
+# Base configuration for Twin Face Verification with Prompt-CAM
+batch_size: 16
+crop_size: 224
+data: twin
+data_path: ./data
+debug: false
+drop_path_rate: 0.1
+early_patience: 101
+epoch: 100
+eval_freq: 10
+final_acc_hp: true
+final_run: true
+full: false
+gpu_num: 1
+lr: 0.005
+lr_min: 1.0e-06
+model: dino
+momentum: 0.9
+normalized: true
+optimizer: sgd
+pretrained_weights: vit_base_patch16_dino
+random_seed: 42
+store_ckp: true
+test_batch_size: 32
+train_type: prompt_cam
+vpt_dropout: 0.1
+vpt_layer: null
+vpt_mode: null
+vpt_num: 2                    # 2 prompts: same_person, different_person
+warmup_epoch: 20
+warmup_lr_init: 0
+wd: 0.001
+
+# Twin-specific configurations
+task_type: twin_verification
+class_num: 2
+
+# Training phases
+training_phases:
+  base:
+    epochs: 40
+    lr: 0.005
+    phase: base
+  twin_focused:
+    epochs: 30
+    lr: 0.001
+    phase: twin_focused
+  attention_refine:
+    epochs: 30
+    lr: 0.0001
+    phase: attention_refine
+
+# WandB tracking
+tracking_method: wandb
+wandb_enabled: true
+wandb_project: prompt_cam_twin
+wandb_entity: null
+wandb_run_name: null
+wandb_tags: ['twin_verification', 'prompt_cam', 'dino']
+
+# Checkpoint settings
+checkpoint_every_epoch: true
+resume_from_checkpoint: null
+checkpoint_dir: ./checkpoints 
