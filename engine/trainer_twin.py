@@ -150,7 +150,7 @@ class TwinTrainer:
             verification_metrics.update(predictions, targets, scores)
             
             # Log batch-level metrics occasionally
-            if batch_idx % 100 == 0:
+            if batch_idx % 2 == 0:
                 logger.info(
                     f"Epoch {epoch}, Batch {batch_idx}/{len(loader)}: "
                     f"Loss: {loss.item():.4f}, Accuracy: {accuracy.item():.4f}"
