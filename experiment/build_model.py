@@ -52,14 +52,14 @@ def get_twin_model(params, visualize=False):
                                   pretrained=False, params=params)
         if not visualize:
             # Load pretrained weights for the base model (excluding twin-specific layers)
-            model.load_pretrained('pretrained_weights/ViT-B_16_in21k.npz')
+            model.load_pretrained('/kaggle/input/nd-twin/ViT-B_16_in21k.npz')
         model.reset_classifier(params.class_num)
         
     elif params.pretrained_weights == "vit_base_mae":
         model = timm.create_model("vit_base_patch16_224_in21k_petl_twin", drop_path_rate=params.drop_path_rate,
                                   pretrained=False, params=params)
         if not visualize:
-            model.load_pretrained('pretrained_weights/mae_pretrain_vit_base.pth')
+            model.load_pretrained('/kaggle/input/nd-twin/mae_pretrain_vit_base.pth')
         model.reset_classifier(params.class_num)
         
     elif params.pretrained_weights == "vit_base_patch14_dinov2":
@@ -67,7 +67,7 @@ def get_twin_model(params, visualize=False):
         model = timm.create_model("vit_base_patch14_dinov2_petl_twin", drop_path_rate=params.drop_path_rate,
                                   pretrained=False, params=params)
         if not visualize:
-            model.load_pretrained('pretrained_weights/dinov2_vitb14_pretrain.pth')
+            model.load_pretrained('/kaggle/input/nd-twin/dinov2_vitb14_pretrain.pth')
         model.reset_classifier(params.class_num)
         
     elif params.pretrained_weights == "vit_base_patch16_dino":
@@ -75,14 +75,14 @@ def get_twin_model(params, visualize=False):
         model = timm.create_model("vit_base_patch16_dino_petl_twin", drop_path_rate=params.drop_path_rate,
                                   pretrained=False, params=params)
         if not visualize:
-            model.load_pretrained('pretrained_weights/dino_vitbase16_pretrain.pth')
+            model.load_pretrained('/kaggle/input/nd-twin/dino_vitbase16_pretrain.pth')
         model.reset_classifier(params.class_num)
         
     elif params.pretrained_weights == "vit_base_patch16_clip_224":
         model = timm.create_model("vit_base_patch16_clip_224_petl_twin", drop_path_rate=params.drop_path_rate,
                                   pretrained=False, params=params)
         if not visualize:
-            model.load_pretrained('pretrained_weights/vit_base_patch16_clip_224.bin')
+            model.load_pretrained('/kaggle/input/nd-twin/vit_base_patch16_clip_224.bin')
         model.reset_classifier(params.class_num)
     else:
         raise ValueError(f"Unsupported pretrained weights for twin model: {params.pretrained_weights}")
@@ -98,14 +98,14 @@ def get_base_model(params, visualize=False):
                                   pretrained=False, params=params)
         if not visualize:
             model.load_pretrained(
-            'pretrained_weights/ViT-B_16_in21k.npz')
+            '/kaggle/input/nd-twin/ViT-B_16_in21k.npz')
         model.reset_classifier(params.class_num)
     elif params.pretrained_weights == "vit_base_mae":
         model = timm.create_model("vit_base_patch16_224_in21k_petl", drop_path_rate=params.drop_path_rate,
                                   pretrained=False, params=params)
         if not visualize:
             model.load_pretrained(
-            'pretrained_weights/mae_pretrain_vit_base.pth')
+            '/kaggle/input/nd-twin/mae_pretrain_vit_base.pth')
         model.reset_classifier(params.class_num)
     elif params.pretrained_weights == "vit_base_patch14_dinov2":
         params.patch_size = 14
@@ -113,7 +113,7 @@ def get_base_model(params, visualize=False):
                                   pretrained=False, params=params)
         if not visualize:
             model.load_pretrained(
-            'pretrained_weights/dinov2_vitb14_pretrain.pth')
+            '/kaggle/input/nd-twin/dinov2_vitb14_pretrain.pth')
         model.reset_classifier(params.class_num)
     elif params.pretrained_weights == "vit_base_patch16_dino":
         params.patch_size = 16
@@ -121,7 +121,7 @@ def get_base_model(params, visualize=False):
                                   pretrained=False, params=params)
         if not visualize:
             model.load_pretrained(
-            'pretrained_weights/dino_vitbase16_pretrain.pth')
+            '/kaggle/input/nd-twin/dino_vitbase16_pretrain.pth')
         model.reset_classifier(params.class_num)
 
     elif params.pretrained_weights == "vit_base_patch16_clip_224":
@@ -129,7 +129,7 @@ def get_base_model(params, visualize=False):
                                   pretrained=False, params=params)
         if not visualize:
             model.load_pretrained(
-                'pretrained_weights/vit_base_patch16_clip_224.bin')
+                '/kaggle/input/nd-twin/vit_base_patch16_clip_224.bin')
         model.reset_classifier(params.class_num)
     else:
         raise ValueError

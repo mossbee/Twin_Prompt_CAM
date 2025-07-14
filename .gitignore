@@ -3,7 +3,7 @@ checkpoints/
 *.pyc
 **/__pycache__/
 output/
-pretrained_weights/
+/kaggle/input/nd-twin/
 data/images/
 visualization/
 data/annotations/
