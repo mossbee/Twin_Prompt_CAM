@@ -33,11 +33,11 @@ class TwinVerificationMetrics:
             scores: Confidence scores/probabilities
         """
         if isinstance(predictions, torch.Tensor):
-            predictions = predictions.cpu().numpy()
+            predictions = predictions.detach().cpu().numpy()
         if isinstance(labels, torch.Tensor):
-            labels = labels.cpu().numpy()
+            labels = labels.detach().cpu().numpy()
         if isinstance(scores, torch.Tensor):
-            scores = scores.cpu().numpy()
+            scores = scores.detach().cpu().numpy()
         
         self.predictions.extend(predictions.flatten())
         self.labels.extend(labels.flatten())
